@@ -1,0 +1,2 @@
+127.0.0.1 - Suspicious request Speed - UA: {'platform': {'version': None, 'name': 'Linux'}, 'os': {'name': 'Linux'}, 'bot': False, 'browser': {'version': '45.0', 'name': 'Firefox'}}
+127.0.0.1 - No User Agent

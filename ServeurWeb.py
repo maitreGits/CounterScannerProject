@@ -86,7 +86,7 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     def isClientSuspicious(self):
 		speed = 0
 		rep = False
-		if self.checkIfMoreThanTenConnexion():
+		if self.checkExistingFile("log/"+self.ip+".txt") and self.checkIfMoreThanTenConnexion():
 			listLastConnexion = self.fetchLastConnexion()
 			speed = self.calculReqSpeed(listLastConnexion)
 			print "Speed :"+str(speed)+"req/s\n"
@@ -111,10 +111,6 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
     	f.write(string)
     	f.close
 	
-	def writeInNewFile(self,file,string):
-		f = open(file,'w')
-		f.write(string)
-		f.close
 
     def writeInLog(self):
 	  	nbPrecis = "%.10f" % float(self.time)
@@ -124,7 +120,12 @@ class MyTCPHandler(SocketServer.BaseRequestHandler):
 			self.writeInExistingFile("log/"+self.ip+".txt",string)
 		else:
 			self.writeInNewFile("log/"+self.ip+".txt",string)
-	
+
+    def writeInNewFile(self,file,string):
+	f = open(file,'w')
+	f.write(string)
+	f.close
+
     def checkExistingFile(self,file):
 		rep = False
 		if os.path.isfile(file):
